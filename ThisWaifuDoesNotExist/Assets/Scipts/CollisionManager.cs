@@ -35,9 +35,9 @@ public class CollisionManager : MonoBehaviour
             if (_woodList.Count > 0)
             {
                 GameObject placedWood = _woodList[_woodList.Count - _index];
-                placedWood.GetComponent<BoxCollider>().isTrigger = false;
                 LeanTween.scale(placedWood, new Vector3(1, 0.06f, 0.7f), 0.0f);
                 LeanTween.move(placedWood.transform.gameObject, placedWoodPosition.transform, 0.0f);
+                placedWood.GetComponent<BoxCollider>().isTrigger = false;
                 placedWood.transform.rotation = placedWoodPosition.transform.rotation;
                 placedWood.transform.SetParent(null);
                 _index++;
