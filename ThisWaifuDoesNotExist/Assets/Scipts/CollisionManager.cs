@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CollisionManager : MonoBehaviour
@@ -17,7 +18,6 @@ public class CollisionManager : MonoBehaviour
         {
             _yOffset += 1.25f;
             _stackedWood++;
-            Debug.Log("Wood : " + _stackedWood);
             other.transform.position = woodStackedPosition.transform.position;
             other.transform.parent = woodStackedPosition.transform;
             other.transform.rotation = woodStackedPosition.transform.rotation;
@@ -27,26 +27,29 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        Debug.Log("list : " + _woodList.Count);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Water"))
         {
-            Debug.Log("Player is on water.");
-            if (_woodList.Count > 0)
+            if (_woodList.Count > 1)
             {
                 GameObject placedWood = _woodList[_woodList.Count - _index];
                 LeanTween.scale(placedWood, new Vector3(1, 0.06f, 0.7f), 0.0f);
-                LeanTween.move(placedWood.transform.gameObject, placedWoodPosition.transform, 0.0f);
+                LeanTween.move(placedWood.transform.gameObject, placedWoodPosition.transform, 0.025f);
+                _yOffset -= 1.25f;
                 placedWood.GetComponent<BoxCollider>().isTrigger = false;
                 placedWood.transform.rotation = placedWoodPosition.transform.rotation;
                 placedWood.transform.SetParent(null);
                 _index++;
-                _yOffset -= 1.25f;
             }
             else
             {
                 isOver = true;
-                _woodList.RemoveAll(null);
             }
         }
     }
