@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float playerSpeed = 5.0f;
     [SerializeField] private float rotateSpeed = 5.0f;
     private float _xDistance, _yDistance;
+    private bool _isStarted = false;
     
     void Update()
     {
@@ -18,7 +19,10 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        transform.Translate(0, 0, 1 * playerSpeed * Time.deltaTime);
+        if (_isStarted)
+        {
+            transform.Translate(0, 0, 1 * playerSpeed * Time.deltaTime);
+        }
     }
 
     void TouchInput()
@@ -28,6 +32,7 @@ public class PlayerController : MonoBehaviour
             _touch = Input.GetTouch(0);
             if (_touch.phase == TouchPhase.Began)
             {
+                _isStarted = true;
                 _touchStartPos = _touch.position;
             }
             else if (_touch.phase == TouchPhase.Moved || _touch.phase == TouchPhase.Ended)
