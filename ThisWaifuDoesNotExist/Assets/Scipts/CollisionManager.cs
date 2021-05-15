@@ -82,7 +82,6 @@ public class CollisionManager : MonoBehaviour
         if (other.CompareTag("Ground"))
         {
             isGrounded = false;
-            
         }
 
         if (other.CompareTag("Wood"))
