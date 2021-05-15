@@ -1,15 +1,26 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 // ReSharper disable once CheckNamespace
 public class PlayerController : MonoBehaviour
 {
+    public static PlayerController instance;
     private Touch _touch;
     private Vector2 _touchStartPos, _touchEndPos;
-    [SerializeField] private float playerSpeed = 5.0f;
+    public float playerSpeed = 5.0f;
     [SerializeField] private float rotateSpeed = 5.0f;
     private float _xDistance, _yDistance;
-    private bool _isStarted = false;
-    
+    public bool isStarted = false;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        this.transform.Rotate(0, 0, 0);
+    }
+
     void Update()
     {
         Move();
@@ -19,7 +30,7 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        if (_isStarted)
+        if (isStarted)
         {
             transform.Translate(0, 0, 1 * playerSpeed * Time.deltaTime);
         }
@@ -32,7 +43,7 @@ public class PlayerController : MonoBehaviour
             _touch = Input.GetTouch(0);
             if (_touch.phase == TouchPhase.Began)
             {
-                _isStarted = true;
+                isStarted = true;
                 _touchStartPos = _touch.position;
             }
             else if (_touch.phase == TouchPhase.Moved || _touch.phase == TouchPhase.Ended)

@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Wood
   - empty
+  - 10X
   layers:
   - Default
   - TransparentFX

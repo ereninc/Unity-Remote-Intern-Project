@@ -1,20 +1,32 @@
-﻿using System;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CollisionManager : MonoBehaviour
 {
+    public static CollisionManager instance;
     public bool isGrounded = true;
     public bool takeWood = false;
-    [SerializeField] private Transform woodStackedPosition;
+    [SerializeField] private GameObject woodStackedPosition;
     [SerializeField] private Transform placedWoodPosition;
     [SerializeField] private GameObject _player;
     private int _stackedWood = 0;
     private float _yOffset = 0;
-    private List<GameObject> _woodList = new List<GameObject>();
-    private int _index = 1;
+    private readonly List<GameObject> _woodList = new List<GameObject>();
     private float _deltaTime = 0.0f;
-    
+    [SerializeField] private GameObject finishedGround;
+    [SerializeField] private GameObject _cameraController;
+    public bool isFinished = false;
+
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Wood"))
@@ -22,6 +34,23 @@ public class CollisionManager : MonoBehaviour
             takeWood = true;
             TakeWood(other);
         }
+
+        if (other.CompareTag("10X"))
+        {
+            isFinished = true;
+            _cameraController.SetActive(false);
+            PlayerController.instance.playerSpeed = 0f;
+            _player.transform.rotation = new Quaternion(0, 160, 0, 0);
+            LeanTween.moveY(_player, -0.950f, 0.2f).setLoopPingPong();
+            LeanTween.move(_player, finishedGround.transform, 0f);
+            //StartCoroutine(NextScene());
+        }
+    }
+
+    private IEnumerator NextScene()
+    {
+        yield return new WaitForSeconds(2.0f);
+        SceneManager.LoadScene(0);
     }
 
     private void TakeWood(Collider wood)
@@ -51,9 +80,15 @@ public class CollisionManager : MonoBehaviour
             isGrounded = false;
             
         }
+
+        if (other.CompareTag("Wood"))
+        {
+            takeWood = false;
+        }
     }
     private void Update()
     {
+        MoveStackedWoods();
         _deltaTime += Time.deltaTime;
         if (!isGrounded && _deltaTime > 0.15f)
         {
@@ -64,7 +99,7 @@ public class CollisionManager : MonoBehaviour
 
     private void PlaceWoods()
     {
-        if (_woodList.Count > 0)
+        if (_woodList.Count > 0 && !isFinished)
         {
             GameObject placedWood = _woodList[_stackedWood-1];
             _woodList.RemoveAt(_stackedWood-1);
@@ -82,6 +117,13 @@ public class CollisionManager : MonoBehaviour
             _player.GetComponent<Rigidbody>().isKinematic = false;
             //_player.GetComponent<Rigidbody>().AddForce(Vector3.up * 50f);
         }
-        
+    }
+
+    private void MoveStackedWoods()
+    {
+        if (isFinished)
+        {
+            LeanTween.moveLocal(woodStackedPosition, new Vector3(20.0f, 20.0f, -1.0f), 0.5f);
+        }
     }
 }
