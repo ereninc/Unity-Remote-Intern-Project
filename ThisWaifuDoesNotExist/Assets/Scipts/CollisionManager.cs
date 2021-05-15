@@ -17,6 +17,8 @@ public class CollisionManager : MonoBehaviour
     private float _deltaTime = 0.0f;
     [SerializeField] private GameObject finishedGround;
     [SerializeField] private GameObject _cameraController;
+    [SerializeField] private GameObject _camera;
+    [SerializeField] private GameObject _cameraPos;
     public bool isFinished = false;
 
     private void Awake()
@@ -41,8 +43,10 @@ public class CollisionManager : MonoBehaviour
             _cameraController.SetActive(false);
             PlayerController.instance.playerSpeed = 0f;
             _player.transform.rotation = new Quaternion(0, 160, 0, 0);
-            LeanTween.moveY(_player, -0.950f, 0.2f).setLoopPingPong();
-            LeanTween.move(_player, finishedGround.transform, 0f);
+            LeanTween.move(_player, new Vector3(finishedGround.transform.position.x, -1, finishedGround.transform.position.z), 0f);
+            _camera.transform.SetParent(_cameraPos.transform);
+            LeanTween.move(_camera, _cameraPos.transform.position, 0.0f);
+            _cameraController.SetActive(true);
             //StartCoroutine(NextScene());
         }
     }
