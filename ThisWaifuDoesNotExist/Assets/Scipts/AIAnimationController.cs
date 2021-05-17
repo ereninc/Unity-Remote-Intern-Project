@@ -17,6 +17,9 @@ public class AIAnimationController : MonoBehaviour
     void Update()
     {
         StartAnimations();
+        CheckNoobWood();
+        CheckMidWood();
+        CheckProWood();
     }
 
     void StopAnimatons()
@@ -33,6 +36,31 @@ public class AIAnimationController : MonoBehaviour
             aiNoobAnimator.GetComponent<Animator>().enabled = true;
             aiMidAnimator.GetComponent<Animator>().enabled = true;
             aiProAnimator.GetComponent<Animator>().enabled = true;
+        }
+    }
+
+    void CheckNoobWood()
+    {
+        if (AI.instance.WoodList() <= 0 && !AI.instance.isGrounded)
+        {
+            aiNoobAnimator.GetComponent<Animator>().enabled = false;
+            aiNoobAnimator.transform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+    void CheckMidWood()
+    {
+        if (AI.instance.WoodList() <= 0 && !AI.instance.isGrounded)
+        {
+            aiMidAnimator.GetComponent<Animator>().enabled = false;
+            aiMidAnimator.transform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+    void CheckProWood()
+    {
+        if (AI.instance.WoodList() <= 0 && !AI.instance.isGrounded)
+        {
+            aiProAnimator.GetComponent<Animator>().enabled = false;
+            aiProAnimator.transform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
 }
