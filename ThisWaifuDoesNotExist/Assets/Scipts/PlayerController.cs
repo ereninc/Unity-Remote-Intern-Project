@@ -24,7 +24,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-        // ReSharper disable once Unity.PerformanceCriticalCodeInvocation
         TouchInput();
     }
 
