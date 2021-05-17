@@ -100,6 +100,7 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
+    // ReSharper disable Unity.PerformanceAnalysis
     private void PlaceWoods()
     {
         if (_woodList.Count > 0 && !isFinished)
