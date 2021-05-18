@@ -1,19 +1,34 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
+    public static UIController instance;
     [SerializeField] private GameObject scoreText;
     [SerializeField] private GameObject startText;
     [SerializeField] private GameObject arrowImage;
     [SerializeField] private GameObject fingerImage;
     [SerializeField] private GameObject finishedMenu;
+    [SerializeField] private TextMeshProUGUI levelScoreText;
+
+    private void Awake()
+    {
+        if (instance == null) instance = this;
+    }
 
     void Update()
     {
         CheckWoodTake();
         StartImages();
         ShowFinishedMenu();
+        SetLevelScoreText();
+    }
+
+    void SetLevelScoreText()
+    {
+        levelScoreText.text = (ScoreManager.instance.playerScore * 10).ToString();
     }
 
     void CheckWoodTake()
@@ -54,5 +69,9 @@ public class UIController : MonoBehaviour
             arrowImage.SetActive(true);
             fingerImage.SetActive(true);
         }
+    }
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(0);
     }
 }
