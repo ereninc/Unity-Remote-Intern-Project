@@ -20,12 +20,24 @@ public class CollisionManager : MonoBehaviour
     [SerializeField] private GameObject _camera;
     [SerializeField] private GameObject _cameraPos;
     public bool isFinished = false;
+    public bool playerNotFirst = false;
 
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+        }
+    }
+    
+    private void Update()
+    {
+        MoveStackedWoods();
+        _deltaTime += Time.deltaTime;
+        if (!isGrounded && _deltaTime > 0.15f)
+        {
+            PlaceWoods();
+            _deltaTime = 0.0f;
         }
     }
 
@@ -48,6 +60,18 @@ public class CollisionManager : MonoBehaviour
             LeanTween.move(_camera, _cameraPos.transform.position, 0.0f);
             _cameraController.SetActive(true);
             //StartCoroutine(NextScene());
+        }
+
+        if (other.CompareTag("FinishLine"))
+        {
+            if (playerNotFirst == true)
+            {
+                isFinished = true;
+                MoveStackedWoods();
+                PlayerController.instance.playerSpeed = 0.0f;
+                _cameraController.SetActive(false);
+                _player.transform.rotation = new Quaternion(0, 160, 0, 0);
+            }
         }
     }
 
@@ -90,17 +114,7 @@ public class CollisionManager : MonoBehaviour
             takeWood = false;
         }
     }
-    private void Update()
-    {
-        MoveStackedWoods();
-        _deltaTime += Time.deltaTime;
-        if (!isGrounded && _deltaTime > 0.15f)
-        {
-            PlaceWoods();
-            _deltaTime = 0.0f;
-        }
-    }
-
+    
     // ReSharper disable Unity.PerformanceAnalysis
     private void PlaceWoods()
     {

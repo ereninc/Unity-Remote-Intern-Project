@@ -350,8 +350,9 @@ MonoBehaviour:
   takeWood: 0
   woodStackedPosition: {fileID: 1797856980}
   placedWoodPosition: {fileID: 1534664949}
-  _player: {fileID: 1716771295}
+  _player: {fileID: 110757765}
   isFinished: 0
+  realPlayer: {fileID: 0}
 --- !u!136 &110757769
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -1355,8 +1356,9 @@ MonoBehaviour:
   takeWood: 0
   woodStackedPosition: {fileID: 1960322586}
   placedWoodPosition: {fileID: 878436881}
-  _player: {fileID: 1716771295}
+  _player: {fileID: 270983173}
   isFinished: 0
+  realPlayer: {fileID: 0}
 --- !u!136 &270983177
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7009,7 +7011,7 @@ GameObject:
   - component: {fileID: 828790476}
   m_Layer: 0
   m_Name: Finish
-  m_TagString: Untagged
+  m_TagString: FinishLine
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
@@ -9775,7 +9777,7 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 828790470}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 5.67, y: 1.571151, z: 1}
@@ -11488,6 +11490,7 @@ MonoBehaviour:
   _camera: {fileID: 963194225}
   _cameraPos: {fileID: 921456597}
   isFinished: 0
+  playerNotFirst: 0
 --- !u!54 &1161060813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12907,6 +12910,7 @@ MonoBehaviour:
   placedWoodPosition: {fileID: 334979643}
   _player: {fileID: 1716771295}
   isFinished: 0
+  realPlayer: {fileID: 0}
 --- !u!95 &1716771298
 Animator:
   serializedVersion: 3

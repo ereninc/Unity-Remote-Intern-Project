@@ -19,6 +19,7 @@ public class AI : MonoBehaviour
     private readonly List<GameObject> _woodList = new List<GameObject>();
     private float _deltaTime = 0.0f;
     public bool isFinished = false;
+    [SerializeField] private GameObject realPlayer;
 
     private void Awake()
     {
@@ -30,10 +31,15 @@ public class AI : MonoBehaviour
 
     private void Start()
     {
+        StopAnimations();
+    }
+
+    public void StopAnimations()
+    {
         animator.enabled = false;
     }
 
-    void StartAnimatons()
+    private void StartAnimations()
     {
         if (PlayerController.instance.isStarted)
         {
@@ -56,6 +62,11 @@ public class AI : MonoBehaviour
         {
             takeWood = true;
             TakeWood(other);
+        }
+
+        if (other.CompareTag("FinishLine"))
+        {
+            CollisionManager.instance.playerNotFirst = true;
         }
     }
 
@@ -95,7 +106,7 @@ public class AI : MonoBehaviour
     private void Update()
     {
         MoveStackedWoods();
-        StartAnimatons();
+        StartAnimations();
         CheckWoodList();
         _deltaTime += Time.deltaTime;
         if (!isGrounded && _deltaTime > 0.15f)
@@ -129,10 +140,5 @@ public class AI : MonoBehaviour
         {
             LeanTween.moveLocal(woodStackedPosition, new Vector3(20.0f, 20.0f, -1.0f), 0.5f);
         }
-    }
-
-    public int WoodList()
-    {
-        return _woodList.Count;
     }
 }
