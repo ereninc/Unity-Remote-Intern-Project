@@ -61,6 +61,7 @@ public class CollisionManager : MonoBehaviour
     {
         _yOffset += 1.25f;
         _stackedWood++;
+        wood.tag = "empty";
         wood.transform.position = woodStackedPosition.transform.position;
         wood.transform.parent = woodStackedPosition.transform;
         wood.transform.rotation = woodStackedPosition.transform.rotation;

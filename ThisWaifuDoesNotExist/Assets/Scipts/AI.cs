@@ -1,6 +1,8 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 
 public class AI : MonoBehaviour
@@ -26,6 +28,28 @@ public class AI : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        animator.enabled = false;
+    }
+
+    void StartAnimatons()
+    {
+        if (PlayerController.instance.isStarted)
+        {
+            animator.enabled = true;
+        }
+    }
+
+    void CheckWoodList()
+    {
+        if (_woodList.Count <= 0 && !isGrounded)
+        {
+            animator.transform.gameObject.GetComponent<Rigidbody>().isKinematic = false;
+            animator.enabled = false;
+        }
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Wood"))
@@ -38,6 +62,7 @@ public class AI : MonoBehaviour
     private void TakeWood(Collider wood)
     {
         _yOffset += 1.25f;
+        wood.tag = "empty";
         _stackedWood++;
         wood.transform.position = woodStackedPosition.transform.position;
         wood.transform.parent = woodStackedPosition.transform;
@@ -70,6 +95,8 @@ public class AI : MonoBehaviour
     private void Update()
     {
         MoveStackedWoods();
+        StartAnimatons();
+        CheckWoodList();
         _deltaTime += Time.deltaTime;
         if (!isGrounded && _deltaTime > 0.15f)
         {
