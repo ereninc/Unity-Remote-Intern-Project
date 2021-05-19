@@ -12,6 +12,7 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject fingerImage;
     [SerializeField] private GameObject finishedMenu;
     [SerializeField] private TextMeshProUGUI levelScoreText;
+    [SerializeField] private TextMeshProUGUI totalGoldText;
 
     private void Awake()
     {
@@ -29,6 +30,7 @@ public class UIController : MonoBehaviour
     void SetLevelScoreText()
     {
         levelScoreText.text = (ScoreManager.instance.playerScore * 10).ToString();
+        totalGoldText.text = DataManager.instance.totalGold.ToString();
     }
 
     void CheckWoodTake()
@@ -73,5 +75,6 @@ public class UIController : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(0);
+        DataManager.instance.totalGold += ScoreManager.instance.playerScore;
     }
 }

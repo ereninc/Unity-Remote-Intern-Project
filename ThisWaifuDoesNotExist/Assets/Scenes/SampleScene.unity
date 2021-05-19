@@ -5729,7 +5729,7 @@ Animator:
   m_GameObject: {fileID: 483910201}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8728d688aa0e5854a86bde6951cee2f4, type: 2}
+  m_Controller: {fileID: 9100000, guid: 229be7d8d2cc1ba41a96d71830ac2c15, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -10708,6 +10708,7 @@ MonoBehaviour:
   fingerImage: {fileID: 349660185}
   finishedMenu: {fileID: 217538518}
   levelScoreText: {fileID: 1155417218}
+  totalGoldText: {fileID: 1880721679}
 --- !u!43 &1085244806
 Mesh:
   m_ObjectHideFlags: 0
@@ -12220,6 +12221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerScore: 0
+  totalGold: 0
 --- !u!114 &1488883554
 MonoBehaviour:
   m_ObjectHideFlags: 0
