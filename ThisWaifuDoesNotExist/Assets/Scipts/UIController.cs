@@ -7,10 +7,7 @@ public class UIController : MonoBehaviour
 {
     public static UIController instance;
     [SerializeField] private GameObject scoreText;
-    [SerializeField] private GameObject startText;
-    [SerializeField] private GameObject arrowImage;
-    [SerializeField] private GameObject fingerImage;
-    [SerializeField] private GameObject customizeBtn;
+    [SerializeField] private GameObject startMenu;
     [SerializeField] private GameObject finishedMenu;
     [SerializeField] private TextMeshProUGUI levelScoreText;
     [SerializeField] private TextMeshProUGUI totalGoldText;
@@ -63,28 +60,28 @@ public class UIController : MonoBehaviour
     {
         if (PlayerController.instance.isStarted)
         {
-            startText.SetActive(false);
-            arrowImage.SetActive(false);
-            fingerImage.SetActive(false);
-            customizeBtn.SetActive(false);
+            startMenu.SetActive(false);
         }
         else
         {
-            startText.SetActive(true);
-            arrowImage.SetActive(true);
-            fingerImage.SetActive(true);
-            customizeBtn.SetActive(true);
+            startMenu.SetActive(true);
         }
     }
     
     public void GetCollectedGold()
     {
         DataManager.instance.SaveGold();
+        DataManager.instance.level += 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void RestartLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void SaveAfterShop()
+    {
+        DataManager.instance.SaveGold();
     }
 }
