@@ -59,7 +59,6 @@ public class CollisionManager : MonoBehaviour
             _camera.transform.SetParent(_cameraPos.transform);
             LeanTween.move(_camera, _cameraPos.transform.position, 0.0f);
             _cameraController.SetActive(true);
-            //StartCoroutine(NextScene());
         }
 
         if (other.CompareTag("FinishLine"))
@@ -75,12 +74,6 @@ public class CollisionManager : MonoBehaviour
         }
     }
 
-    private IEnumerator NextScene()
-    {
-        yield return new WaitForSeconds(2.0f);
-        SceneManager.LoadScene(0);
-    }
-
     private void TakeWood(Collider wood)
     {
         _yOffset += 1.25f;
@@ -92,7 +85,7 @@ public class CollisionManager : MonoBehaviour
         LeanTween.scale(wood.gameObject, new Vector3(0.6375f, 0.9563f, 0.6375f), 0.0f);
         LeanTween.moveLocalY(wood.gameObject, _yOffset, 0.0f);
         _woodList.Add(wood.transform.gameObject);
-        DataManager.instance.playerScore += 1;
+        DataManager.instance.EarnGold();
     }
 
     private void OnTriggerStay(Collider other)
@@ -131,11 +124,11 @@ public class CollisionManager : MonoBehaviour
             placedWood.transform.rotation = placedWoodPosition.transform.rotation;
             placedWood.transform.SetParent(null);
             _stackedWood--;
+            DataManager.instance.LoseGold();
         }
         else
         {
             _player.GetComponent<Rigidbody>().isKinematic = false;
-            //_player.GetComponent<Rigidbody>().AddForce(Vector3.up * 50f);
         }
     }
 

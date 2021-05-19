@@ -23,7 +23,7 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-        //CheckWoodTake();
+        CheckWoodTake();
         StartImages();
         ShowFinishedMenu();
         SetLevelScoreText();
@@ -31,7 +31,8 @@ public class UIController : MonoBehaviour
 
     void SetLevelScoreText()
     {
-        levelScoreText.text = (DataManager.instance.playerScore * 10).ToString();
+        levelScoreText.text = (DataManager.instance.currentLevelScore).ToString();
+        totalGoldText.text = DataManager.instance.totalGold.ToString();
     }
 
     void CheckWoodTake()
@@ -76,8 +77,9 @@ public class UIController : MonoBehaviour
         }
     }
     
-    public void NextLevel()
+    public void GetCollectedGold()
     {
+        DataManager.instance.SaveGold();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 

@@ -15439,6 +15439,7 @@ MonoBehaviour:
   finishedMenu: {fileID: 217538518}
   levelScoreText: {fileID: 1155417218}
   totalGoldText: {fileID: 1880721679}
+  levelText: {fileID: 1675015509}
 --- !u!43 &1085244806
 Mesh:
   m_ObjectHideFlags: 0
@@ -17848,7 +17849,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1073527184}
-        m_MethodName: NextLevel
+        m_MethodName: GetCollectedGold
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -18038,7 +18039,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1488883552}
-  - component: {fileID: 1488883553}
   - component: {fileID: 1488883554}
   - component: {fileID: 1488883555}
   m_Layer: 0
@@ -18062,19 +18062,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1488883553
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1488883551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5bee4c34afc0c24aa27056d676357d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerScore: 0
 --- !u!114 &1488883554
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18100,10 +18087,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8704e1230261364db8f52f2ffe6ee9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevelScore: 0
   totalGold: 0
-  level: 0
-  playerColor: {r: 0, g: 0, b: 0, a: 0}
-  playerWoodColor: {r: 0, g: 0, b: 0, a: 0}
+  playerMaterial: {fileID: 0}
+  playerWoodMaterial: {fileID: 0}
 --- !u!1 &1501348292
 GameObject:
   m_ObjectHideFlags: 0
