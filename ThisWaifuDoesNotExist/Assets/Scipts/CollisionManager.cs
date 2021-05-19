@@ -71,7 +71,6 @@ public class CollisionManager : MonoBehaviour
                 PlayerController.instance.playerSpeed = 0.0f;
                 _cameraController.SetActive(false);
                 _player.transform.rotation = new Quaternion(0, 160, 0, 0);
-                Debug.Log(ScoreManager.instance.playerScore);
             }
         }
     }
@@ -93,7 +92,7 @@ public class CollisionManager : MonoBehaviour
         LeanTween.scale(wood.gameObject, new Vector3(0.6375f, 0.9563f, 0.6375f), 0.0f);
         LeanTween.moveLocalY(wood.gameObject, _yOffset, 0.0f);
         _woodList.Add(wood.transform.gameObject);
-        ScoreManager.instance.playerScore += 1;
+        DataManager.instance.playerScore += 1;
     }
 
     private void OnTriggerStay(Collider other)

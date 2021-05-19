@@ -1,15 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
 {
     public static DataManager instance;
-    public int totalGold;
+    public int playerScore = 0;
 
-    public void SaveGold()
+    private void Awake()
     {
-        PlayerPrefs.SetInt("Gold", totalGold);
+        if (instance == null) instance = this;
     }
-
 }

@@ -10,9 +10,11 @@ public class UIController : MonoBehaviour
     [SerializeField] private GameObject startText;
     [SerializeField] private GameObject arrowImage;
     [SerializeField] private GameObject fingerImage;
+    [SerializeField] private GameObject customizeBtn;
     [SerializeField] private GameObject finishedMenu;
     [SerializeField] private TextMeshProUGUI levelScoreText;
     [SerializeField] private TextMeshProUGUI totalGoldText;
+    [SerializeField] private TextMeshProUGUI levelText;
 
     private void Awake()
     {
@@ -21,7 +23,7 @@ public class UIController : MonoBehaviour
 
     void Update()
     {
-        CheckWoodTake();
+        //CheckWoodTake();
         StartImages();
         ShowFinishedMenu();
         SetLevelScoreText();
@@ -29,8 +31,7 @@ public class UIController : MonoBehaviour
 
     void SetLevelScoreText()
     {
-        levelScoreText.text = (ScoreManager.instance.playerScore * 10).ToString();
-        totalGoldText.text = DataManager.instance.totalGold.ToString();
+        levelScoreText.text = (DataManager.instance.playerScore * 10).ToString();
     }
 
     void CheckWoodTake()
@@ -64,17 +65,24 @@ public class UIController : MonoBehaviour
             startText.SetActive(false);
             arrowImage.SetActive(false);
             fingerImage.SetActive(false);
+            customizeBtn.SetActive(false);
         }
         else
         {
             startText.SetActive(true);
             arrowImage.SetActive(true);
             fingerImage.SetActive(true);
+            customizeBtn.SetActive(true);
         }
     }
+    
     public void NextLevel()
     {
-        SceneManager.LoadScene(0);
-        DataManager.instance.totalGold += ScoreManager.instance.playerScore;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

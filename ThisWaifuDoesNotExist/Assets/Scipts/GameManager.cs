@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     {
         if (player.transform.position.y <= -2.0f)
         {
-            UIController.instance.NextLevel();
+            UIController.instance.RestartLevel();
         }
     }
 }
