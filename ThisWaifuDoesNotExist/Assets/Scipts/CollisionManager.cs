@@ -22,6 +22,7 @@ public class CollisionManager : MonoBehaviour
     public bool isFinished = false;
     public bool playerNotFirst = false;
     [SerializeField] private Animator animator;
+    [SerializeField] private Camera mainCamera;
     
 
     private void Awake()
@@ -30,6 +31,8 @@ public class CollisionManager : MonoBehaviour
         {
             instance = this;
         }
+
+        mainCamera.fieldOfView = 60.0f;
     }
     
     private void Update()
@@ -139,6 +142,12 @@ public class CollisionManager : MonoBehaviour
         if (isFinished)
         {
             LeanTween.moveLocal(woodStackedPosition, new Vector3(20.0f, 20.0f, -1.0f), 0.5f);
+            mainCamera.fieldOfView = 30.0f;
         }
+    }
+
+    public int WoodCount()
+    {
+        return _woodList.Count;
     }
 }

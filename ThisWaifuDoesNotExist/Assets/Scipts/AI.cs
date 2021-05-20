@@ -20,6 +20,7 @@ public class AI : MonoBehaviour
     private float _deltaTime = 0.0f;
     public bool isFinished = false;
     [SerializeField] private GameObject realPlayer;
+    [SerializeField] private Animator animationStateController;
 
     private void Awake()
     {
@@ -105,6 +106,9 @@ public class AI : MonoBehaviour
     }
     private void Update()
     {
+        GameStarted();
+        HaveWood();
+        GameFinished();
         MoveStackedWoods();
         StartAnimations();
         CheckWoodList();
@@ -139,6 +143,30 @@ public class AI : MonoBehaviour
         if (isFinished)
         {
             LeanTween.moveLocal(woodStackedPosition, new Vector3(20.0f, 20.0f, -1.0f), 0.5f);
+        }
+    }
+    
+    private void GameStarted()
+    {
+        if (PlayerController.instance.isStarted)
+        {
+            animationStateController.SetBool("isStarted", true);
+        }
+    }
+
+    private void HaveWood()
+    {
+        if (_woodList.Count > 0)
+        {
+            animationStateController.SetBool("haveWood", true);
+        }
+    }
+
+    private void GameFinished()
+    {
+        if (isFinished)
+        {
+            animationStateController.SetBool("isFinished", true);
         }
     }
 }
