@@ -41,6 +41,7 @@ public class DataManager : MonoBehaviour
             string saveString = File.ReadAllText(Application.dataPath + "/save.txt");
             _loadedSavedObject = JsonUtility.FromJson<SaveObject>(saveString);
             totalGold = _loadedSavedObject.goldAmount;
+            level = _loadedSavedObject.level;
         }
     }
 
@@ -50,6 +51,13 @@ public class DataManager : MonoBehaviour
         _saveObject.goldAmount += totalGold;
         json = JsonUtility.ToJson(_saveObject);
         currentLevelScore = 0;
+        File.WriteAllText(Application.dataPath + "/save.txt", json);
+    }
+
+    public void SaveLevel()
+    {
+        _saveObject.level = level;
+        json = JsonUtility.ToJson(_saveObject);
         File.WriteAllText(Application.dataPath + "/save.txt", json);
     }
 

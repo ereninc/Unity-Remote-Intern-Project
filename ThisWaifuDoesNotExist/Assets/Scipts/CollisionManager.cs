@@ -21,6 +21,8 @@ public class CollisionManager : MonoBehaviour
     [SerializeField] private GameObject _cameraPos;
     public bool isFinished = false;
     public bool playerNotFirst = false;
+    [SerializeField] private Animator animator;
+    
 
     private void Awake()
     {

@@ -30,6 +30,7 @@ public class UIController : MonoBehaviour
     {
         levelScoreText.text = (DataManager.instance.currentLevelScore).ToString();
         totalGoldText.text = DataManager.instance.totalGold.ToString();
+        levelText.text = DataManager.instance.level.ToString();
     }
 
     void CheckWoodTake()
@@ -72,6 +73,7 @@ public class UIController : MonoBehaviour
     {
         DataManager.instance.SaveGold();
         DataManager.instance.level += 1;
+        DataManager.instance.SaveLevel();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
