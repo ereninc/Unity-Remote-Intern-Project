@@ -1,1 +1,1 @@
-{"goldAmount":6610,"level":8,"playerColor":"","woodColor":""}
+{"goldAmount":0,"level":0,"playerColor":"","woodColor":""}

@@ -1,18 +1,40 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class LevelGenerator : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private DataManager _dm;
+    private int _level;
+    [SerializeField] private GameObject[] grounds;
+    [SerializeField] private GameObject[] opponents;
+
+    private void Start()
     {
-        
+        _dm = DataManager.instance;
+        Debug.Log("Level started at : " + _dm.GetLevel());
+        _level = _dm.GetLevel();
+        GenerateLevel();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void GenerateLevel()
     {
-        
+        SpawnMap();
+    }
+
+    private void SpawnMap()
+    {
+        int arrayCount = grounds.Length;
+        for (int i = 0; i < arrayCount; i++)
+        {
+            if (i == (_level-1))
+            {
+                grounds[i].SetActive(true);
+                opponents[i].SetActive(true);
+            }
+            else
+            {
+                grounds[i].SetActive(false);
+                opponents[i].SetActive(false);
+            }
+        }
     }
 }

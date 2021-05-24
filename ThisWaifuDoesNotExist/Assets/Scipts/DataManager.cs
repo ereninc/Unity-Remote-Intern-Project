@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -83,6 +80,11 @@ public class DataManager : MonoBehaviour
     public void LoseGold()
     {
         currentLevelScore -= 10;
+    }
+
+    public int GetLevel()
+    {
+        return level;
     }
 }
 
