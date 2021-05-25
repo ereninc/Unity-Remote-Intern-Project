@@ -77,6 +77,11 @@ public class DataManager : MonoBehaviour
         currentLevelScore += 10;
     }
 
+    public void RewardedAdGold()
+    {
+        currentLevelScore *= 5;
+    }
+
     public void LoseGold()
     {
         currentLevelScore -= 10;

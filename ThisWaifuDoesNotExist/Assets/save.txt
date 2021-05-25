@@ -1,1 +1,1 @@
-{"goldAmount":0,"level":0,"playerColor":"","woodColor":""}
+{"goldAmount":0,"level":1,"playerColor":"","woodColor":""}
