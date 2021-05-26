@@ -10,6 +10,11 @@ TagManager:
   - empty
   - 10X
   - FinishLine
+  - 8x
+  - 6x
+  - 5x
+  - 3x
+  - 2x
   layers:
   - Default
   - TransparentFX
