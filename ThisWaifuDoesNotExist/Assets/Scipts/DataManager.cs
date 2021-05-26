@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -97,6 +98,4 @@ public class SaveObject
 {
     public int goldAmount;
     public int level;
-    public string playerColor;
-    public string woodColor;
 }

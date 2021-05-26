@@ -42,7 +42,6 @@ public class PlayerController : MonoBehaviour
             _touch = Input.GetTouch(0);
             if (_touch.phase == TouchPhase.Began)
             {
-                isStarted = true;
                 _touchStartPos = _touch.position;
             }
             else if (_touch.phase == TouchPhase.Moved || _touch.phase == TouchPhase.Ended)
@@ -53,9 +52,11 @@ public class PlayerController : MonoBehaviour
 
                 if (Mathf.Abs(_xDistance) > Mathf.Abs(_yDistance))
                 {
+                    isStarted = true;
                     if (_xDistance > 0)
                     {
                         transform.Rotate(0, 1 * rotateSpeed * Time.deltaTime, 0);
+                isStarted = true;
                     }
                     else
                     {

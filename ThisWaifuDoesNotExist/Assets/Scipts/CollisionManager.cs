@@ -23,8 +23,8 @@ public class CollisionManager : MonoBehaviour
     public bool playerNotFirst = false;
     [SerializeField] private Animator animator;
     [SerializeField] private Camera mainCamera;
+    private GameObject _lastTouchedBoost;
     
-
     private void Awake()
     {
         if (instance == null)
@@ -54,9 +54,45 @@ public class CollisionManager : MonoBehaviour
             TakeWood(other);
         }
 
+        if (other.CompareTag("2X"))
+        {
+            _lastTouchedBoost = other.gameObject;
+            DataManager.instance.currentLevelScore = 200;
+            FinishedOnBoost();
+        }
+        
+        if (other.CompareTag("3X"))
+        {
+            _lastTouchedBoost = other.gameObject;
+            DataManager.instance.currentLevelScore = 300;
+            FinishedOnBoost();
+        }
+        
+        if (other.CompareTag("5X"))
+        {
+            _lastTouchedBoost = other.gameObject;
+            DataManager.instance.currentLevelScore = 500;
+            FinishedOnBoost();
+        }
+        
+        if (other.CompareTag("6X"))
+        {
+            _lastTouchedBoost = other.gameObject;
+            DataManager.instance.currentLevelScore = 600;
+            FinishedOnBoost();
+        }
+        
+        if (other.CompareTag("8X"))
+        {
+            _lastTouchedBoost = other.gameObject;
+            DataManager.instance.currentLevelScore = 800;
+            FinishedOnBoost();
+        }
+
         if (other.CompareTag("10X"))
         {
             isFinished = true;
+            DataManager.instance.currentLevelScore = 1000;
             _cameraController.SetActive(false);
             PlayerController.instance.playerSpeed = 0f;
             _player.transform.rotation = new Quaternion(0, 160, 0, 0);
@@ -76,6 +112,17 @@ public class CollisionManager : MonoBehaviour
                 _cameraController.SetActive(false);
                 _player.transform.rotation = new Quaternion(0, 160, 0, 0);
             }
+        }
+    }
+
+    public void FinishedOnBoost()
+    {
+        if (_woodList.Count == 0)
+        {
+            isFinished = true;
+            PlayerController.instance.playerSpeed = 0f;
+            _player.transform.rotation = new Quaternion(0, 160, 0, 0);
+            LeanTween.move(_player, new Vector3(_lastTouchedBoost.transform.position.x, -1, _lastTouchedBoost.transform.position.z), 0f);
         }
     }
 

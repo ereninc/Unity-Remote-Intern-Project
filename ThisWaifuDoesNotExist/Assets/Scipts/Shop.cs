@@ -10,10 +10,8 @@ public class Shop : MonoBehaviour
     [SerializeField] private TextMeshProUGUI goldText;
     private DataManager _dm;
     private int price = 500;
-    [SerializeField] private Material greenEye;
-    [SerializeField] private Material blueEye;
-    [SerializeField] private Material redEye;
-    [SerializeField] private Material pinkEye;
+    [SerializeField] private GameObject playerSkin;
+    [SerializeField] private GameObject woodSkin;
 
     private void Awake()
     {
@@ -32,6 +30,7 @@ public class Shop : MonoBehaviour
         {
             woodColor = "Red";
             _dm.SetSavedTotalGold(price);
+            playerSkin.GetComponent<Material>().color = Color.red;
         }
     }
     public void SetColorBlue()
