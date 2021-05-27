@@ -1,1 +1,1 @@
-{"goldAmount":600,"level":2}
+{"goldAmount":21850,"level":12}

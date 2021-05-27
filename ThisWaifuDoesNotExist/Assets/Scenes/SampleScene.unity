@@ -13910,7 +13910,6 @@ GameObject:
   - component: {fileID: 1161060811}
   - component: {fileID: 1161060812}
   - component: {fileID: 1161060813}
-  - component: {fileID: 1161060814}
   - component: {fileID: 1161060815}
   m_Layer: 0
   m_Name: Player
@@ -14056,20 +14055,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &1161060814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161060806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4959336080aeb354ab174b2c7b862aa8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: ad2797b13f773fb4ba6f4321c3c0a6e2, type: 2}
-  record: 0
 --- !u!114 &1161060815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14754,7 +14739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1292184676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14767,6 +14752,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbe024643814594cb7f95250b9815cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RewardedAdShow: 0
+  AdShow: 0
 --- !u!4 &1292184677
 Transform:
   m_ObjectHideFlags: 0
@@ -15202,7 +15189,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1423526038}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1073527184}
+        m_MethodName: GetRewardedGold
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1423526038
 MonoBehaviour:
   m_ObjectHideFlags: 0

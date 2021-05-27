@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
@@ -30,7 +31,7 @@ public class UIController : MonoBehaviour
     {
         levelScoreText.text = (DataManager.instance.currentLevelScore).ToString();
         totalGoldText.text = DataManager.instance.totalGold.ToString();
-        levelText.text = DataManager.instance.level.ToString();
+        levelText.text = (DataManager.instance.level+1).ToString();
     }
 
     void CheckWoodTake()
@@ -68,14 +69,6 @@ public class UIController : MonoBehaviour
             startMenu.SetActive(true);
         }
     }
-    
-    public void GetCollectedGold()
-    {
-        DataManager.instance.SaveGold();
-        DataManager.instance.level += 1;
-        DataManager.instance.SaveLevel();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
 
     public void RestartLevel()
     {
@@ -85,5 +78,15 @@ public class UIController : MonoBehaviour
     public void SaveAfterShop()
     {
         DataManager.instance.SaveGold();
+    }
+    
+    public void GetCollectedGold()
+    {
+        AdManager.instance.ShowAd();
+    }
+    
+    public void GetRewardedGold()
+    {
+        AdManager.instance.ShowRewardedAd();
     }
 }

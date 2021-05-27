@@ -10,11 +10,10 @@ public class LevelGenerator : MonoBehaviour
     private void Start()
     {
         _dm = DataManager.instance;
-        //Debug.Log("Level started at : " + _dm.GetLevel());
         _level = _dm.GetLevel();
-        if (_level > 5)
+        if (_level > 4)
         {
-            _level = 1;
+            _level = 0;
         }
         GenerateLevel();
     }
@@ -29,7 +28,7 @@ public class LevelGenerator : MonoBehaviour
         int arrayCount = grounds.Length;
         for (int i = 0; i < arrayCount; i++)
         {
-            if (i == (_level-1))
+            if (i == _level)
             {
                 grounds[i].SetActive(true);
                 opponents[i].SetActive(true);

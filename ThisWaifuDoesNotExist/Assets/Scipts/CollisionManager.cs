@@ -23,7 +23,7 @@ public class CollisionManager : MonoBehaviour
     public bool playerNotFirst = false;
     [SerializeField] private Animator animator;
     [SerializeField] private Camera mainCamera;
-    private GameObject _lastTouchedBoost;
+    public GameObject lastTouchedBoost;
     
     private void Awake()
     {
@@ -44,6 +44,11 @@ public class CollisionManager : MonoBehaviour
             PlaceWoods();
             _deltaTime = 0.0f;
         }
+
+        if (_player.transform.position.y <= -2)
+        {
+            isFinished = true;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -56,35 +61,35 @@ public class CollisionManager : MonoBehaviour
 
         if (other.CompareTag("2X"))
         {
-            _lastTouchedBoost = other.gameObject;
+            lastTouchedBoost = other.gameObject;
             DataManager.instance.currentLevelScore = 200;
             FinishedOnBoost();
         }
         
         if (other.CompareTag("3X"))
         {
-            _lastTouchedBoost = other.gameObject;
+            lastTouchedBoost = other.gameObject;
             DataManager.instance.currentLevelScore = 300;
             FinishedOnBoost();
         }
         
         if (other.CompareTag("5X"))
         {
-            _lastTouchedBoost = other.gameObject;
+            lastTouchedBoost = other.gameObject;
             DataManager.instance.currentLevelScore = 500;
             FinishedOnBoost();
         }
         
         if (other.CompareTag("6X"))
         {
-            _lastTouchedBoost = other.gameObject;
+            lastTouchedBoost = other.gameObject;
             DataManager.instance.currentLevelScore = 600;
             FinishedOnBoost();
         }
         
         if (other.CompareTag("8X"))
         {
-            _lastTouchedBoost = other.gameObject;
+            lastTouchedBoost = other.gameObject;
             DataManager.instance.currentLevelScore = 800;
             FinishedOnBoost();
         }
@@ -120,9 +125,13 @@ public class CollisionManager : MonoBehaviour
         if (_woodList.Count == 0)
         {
             isFinished = true;
+            _cameraController.SetActive(false);
             PlayerController.instance.playerSpeed = 0f;
             _player.transform.rotation = new Quaternion(0, 160, 0, 0);
-            LeanTween.move(_player, new Vector3(_lastTouchedBoost.transform.position.x, -1, _lastTouchedBoost.transform.position.z), 0f);
+            LeanTween.move(_player, new Vector3(lastTouchedBoost.transform.position.x, -1, lastTouchedBoost.transform.position.z), 0f);
+            _camera.transform.SetParent(_cameraPos.transform);
+            LeanTween.move(_camera, _cameraPos.transform.position, 0.0f);
+            _cameraController.SetActive(true);
         }
     }
 

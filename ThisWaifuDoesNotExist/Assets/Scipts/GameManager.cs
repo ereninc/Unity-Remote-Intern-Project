@@ -14,8 +14,14 @@ public class GameManager : MonoBehaviour
     {
         if (player.transform.position.y <= -2.0f)
         {
-            //UIController.instance.RestartLevel();
-            CollisionManager.instance.FinishedOnBoost();
+            if (CollisionManager.instance.lastTouchedBoost != null)
+            {
+                CollisionManager.instance.FinishedOnBoost();
+            }
+            else
+            {
+                UIController.instance.RestartLevel();
+            }
         }
     }
 }
