@@ -128,9 +128,9 @@ public class CollisionManager : MonoBehaviour
             _cameraController.SetActive(false);
             PlayerController.instance.playerSpeed = 0f;
             _player.transform.rotation = new Quaternion(0, 160, 0, 0);
-            LeanTween.move(_player, new Vector3(lastTouchedBoost.transform.position.x, -1, lastTouchedBoost.transform.position.z), 0f);
+            LeanTween.move(_player, new Vector3(lastTouchedBoost.transform.position.x, -1.0f, lastTouchedBoost.transform.position.z), 0f);
             _camera.transform.SetParent(_cameraPos.transform);
-            LeanTween.move(_camera, _cameraPos.transform.position, 0.0f);
+            //LeanTween.move(_camera, _cameraPos.transform.position, 0.0f);
             _cameraController.SetActive(true);
         }
     }

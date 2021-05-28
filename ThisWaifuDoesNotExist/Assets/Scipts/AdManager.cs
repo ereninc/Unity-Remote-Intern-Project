@@ -1,29 +1,22 @@
 ﻿using System;
-using System.Collections;
 using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class AdManager : MonoBehaviour
 {
-    public static AdManager instance;
-    string App_ID = "ca-app-pub-xxx~xxx";
-    string interstitialAd_ID = "ca-app-pub-xxx/xxx";
-    string bannerAd_ID = "ca-app-pub-xxx/xxx";
-    string rewardedAd_ID = "ca-app-pub-xxx/xxx";    
+    string App_ID = "ca-app-pub-8665605135575423~4849708017";
+    string interstitialAd_ID = "ca-app-pub-8665605135575423/6578271398";
+    string bannerAd_ID = "ca-app-pub-8665605135575423/9910463002";
+    string rewardedAd_ID = "ca-app-pub-8665605135575423/8405809644";    
     
     string testInterstitialAd_ID = "ca-app-pub-3940256099942544/1033173712";
     string testBannerAd_ID = "ca-app-pub-3940256099942544/6300978111";
     string testRewardedAd_ID = "ca-app-pub-3940256099942544/5224354917";
 
-    private BannerView bannerView;
-    private InterstitialAd interstitialAd;
-    private RewardedAd rewardedAd;
-
-    private void Awake()
-    {
-        instance = this;
-    }
+    private BannerView _bannerView;
+    private InterstitialAd _interstitialAd;
+    private RewardedAd _rewardedAd;
 
     void Start() 
     {
@@ -33,55 +26,91 @@ public class AdManager : MonoBehaviour
         this.RequestRewardedAd();
     }
 
+    private void Update()
+    {
+        if (UIController.instance.AdShow)
+        {
+            ShowAd();
+        }
+        
+        if (UIController.instance.RewardedAdShow)
+        {
+            ShowRewardedAd();
+        }
+    }
+
     private void RequestBannerAd() 
     {
-        this.bannerView = new BannerView(testBannerAd_ID, AdSize.Banner, AdPosition.Bottom);
+        this._bannerView = new BannerView(bannerAd_ID, AdSize.Banner, AdPosition.Bottom);
         AdRequest request = new AdRequest.Builder().Build();
-        this.bannerView.LoadAd(request);
+        this._bannerView.LoadAd(request);
     }
 
     private void RequestInterstitialAd() 
     {
-        this.interstitialAd = new InterstitialAd(testInterstitialAd_ID);
-        AdRequest request = new AdRequest.Builder().Build();
-        this.interstitialAd.LoadAd(request);
+        this._interstitialAd = new InterstitialAd(interstitialAd_ID);
+        AdRequest request = new AdRequest.Builder().Build();    
+        
+        // Called when an ad is shown.
+        this._interstitialAd.OnAdOpening += HandleOnAdOpened;
+        // Called when the ad is closed.
+        this._interstitialAd.OnAdClosed += HandleOnAdClosed;
+        
+        this._interstitialAd.LoadAd(request);
     }
 	
     private void RequestRewardedAd() 
     {
-        this.rewardedAd = new RewardedAd(testRewardedAd_ID);
+        this._rewardedAd = new RewardedAd(rewardedAd_ID);
         AdRequest request = new AdRequest.Builder().Build();
-        this.rewardedAd.LoadAd(request);
+        
+        
+        // Called when an ad is shown.
+        this._rewardedAd.OnAdOpening += HandleRewardedAdOpening;
+        // Called when the ad is closed.
+        this._rewardedAd.OnAdClosed += HandleRewardedAdClosed;
+        
+        this._rewardedAd.LoadAd(request);
     }
 
-    public void ShowAd() 
+    private void ShowAd() 
     {
-        if (this.interstitialAd.IsLoaded()) 
-        {     
-            DataManager.instance.SaveGold();
-            DataManager.instance.level += 1;
-            DataManager.instance.SaveLevel(); 
-            StartCoroutine(ReloadWithDelay());
-            this.interstitialAd.Show();
+        if (this._interstitialAd.IsLoaded()) 
+        {
+            this._interstitialAd.Show();
         }
     }
 	
-    public void ShowRewardedAd() 
+    private void ShowRewardedAd() 
     {
-        if (this.rewardedAd.IsLoaded())
+        if (this._rewardedAd.IsLoaded())
         {
-            DataManager.instance.RewardedAdGold();
-            DataManager.instance.SaveGold();
-            DataManager.instance.level += 1;
-            DataManager.instance.SaveLevel();
-            StartCoroutine(ReloadWithDelay());
-            this.rewardedAd.Show();
+            this._rewardedAd.Show();
         }
     }
-    
-    IEnumerator ReloadWithDelay()
+
+    private void HandleOnAdOpened(object sender, EventArgs args)
     {
-        yield return new WaitForSeconds(1f);
+        DataManager.instance.SaveGold();
+        DataManager.instance.level += 1;
+        DataManager.instance.SaveLevel();
+    }
+
+    private void HandleOnAdClosed(object sender, EventArgs args)
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void HandleRewardedAdOpening(object sender, EventArgs args)
+    {
+        DataManager.instance.RewardedAdGold();
+        DataManager.instance.SaveGold();
+        DataManager.instance.level += 1;
+        DataManager.instance.SaveLevel();
+    }
+
+    private void HandleRewardedAdClosed(object sender, EventArgs args)
+    {
         SceneManager.LoadScene(0);
     }
 }

@@ -14,6 +14,9 @@ public class UIController : MonoBehaviour
     [SerializeField] private TextMeshProUGUI totalGoldText;
     [SerializeField] private TextMeshProUGUI levelText;
 
+    public bool AdShow = false;
+    public bool RewardedAdShow = false;
+
     private void Awake()
     {
         if (instance == null) instance = this;
@@ -25,6 +28,7 @@ public class UIController : MonoBehaviour
         StartImages();
         ShowFinishedMenu();
         SetLevelScoreText();
+        SaveData();
     }
 
     void SetLevelScoreText()
@@ -72,7 +76,7 @@ public class UIController : MonoBehaviour
 
     public void RestartLevel()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SceneManager.LoadScene(0);
     }
 
     public void SaveAfterShop()
@@ -82,11 +86,30 @@ public class UIController : MonoBehaviour
     
     public void GetCollectedGold()
     {
-        AdManager.instance.ShowAd();
+        /*DataManager.instance.SaveGold();
+        DataManager.instance.level += 1;
+        DataManager.instance.SaveLevel();*/
+        AdShow = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     public void GetRewardedGold()
+    { 
+        DataManager.instance.RewardedAdGold();
+        /*DataManager.instance.SaveGold();
+        DataManager.instance.level += 1;
+        DataManager.instance.SaveLevel();*/
+        RewardedAdShow = true;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void SaveData()
     {
-        AdManager.instance.ShowRewardedAd();
+        if (CollisionManager.instance.isFinished && (AdShow || RewardedAdShow))
+        {
+            DataManager.instance.SaveGold();
+            DataManager.instance.level += 1;
+            DataManager.instance.SaveLevel();
+        }
     }
 }

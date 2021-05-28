@@ -2078,7 +2078,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 261260084}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -2849,7 +2849,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 308300131}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -3376,7 +3376,7 @@ PrefabInstance:
     - target: {fileID: 107955245655638006, guid: 8b26f51f6a0a6e348b651a742a19c805,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8b26f51f6a0a6e348b651a742a19c805, type: 3}
@@ -11432,7 +11432,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 897896340}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -12018,7 +12018,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &963345034
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12601,6 +12601,8 @@ MonoBehaviour:
   levelScoreText: {fileID: 1155417218}
   totalGoldText: {fileID: 1880721679}
   levelText: {fileID: 1675015509}
+  AdShow: 0
+  RewardedAdShow: 0
 --- !u!1 &1074240206
 GameObject:
   m_ObjectHideFlags: 0
@@ -13223,7 +13225,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1129106036}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -14039,6 +14041,7 @@ MonoBehaviour:
   playerNotFirst: 0
   animator: {fileID: 0}
   mainCamera: {fileID: 963194227}
+  lastTouchedBoost: {fileID: 0}
 --- !u!54 &1161060813
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -14309,7 +14312,7 @@ PrefabInstance:
     - target: {fileID: 8765563158464575820, guid: 4008b722c663d2543acad1873cc4f5e4,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8765563158464575857, guid: 4008b722c663d2543acad1873cc4f5e4,
         type: 3}
@@ -14752,8 +14755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8dbe024643814594cb7f95250b9815cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RewardedAdShow: 0
-  AdShow: 0
 --- !u!4 &1292184677
 Transform:
   m_ObjectHideFlags: 0
@@ -16675,7 +16676,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1561060339}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -17170,7 +17171,7 @@ CapsuleCollider:
   m_GameObject: {fileID: 1663237158}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   m_Radius: 0.5000001
   m_Height: 2
   m_Direction: 1
@@ -18644,7 +18645,7 @@ PrefabInstance:
     - target: {fileID: 197671240518243997, guid: 32985c50892afdf4d84d5a56923b8af6,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 32985c50892afdf4d84d5a56923b8af6, type: 3}
