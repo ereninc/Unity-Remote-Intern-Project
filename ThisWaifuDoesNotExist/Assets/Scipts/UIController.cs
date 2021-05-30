@@ -86,20 +86,20 @@ public class UIController : MonoBehaviour
     
     public void GetCollectedGold()
     {
-        /*DataManager.instance.SaveGold();
+        DataManager.instance.SaveGold();
         DataManager.instance.level += 1;
-        DataManager.instance.SaveLevel();*/
-        AdShow = true;
+        DataManager.instance.SaveLevel();
+        //AdShow = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
     
     public void GetRewardedGold()
     { 
         DataManager.instance.RewardedAdGold();
-        /*DataManager.instance.SaveGold();
+        DataManager.instance.SaveGold();
         DataManager.instance.level += 1;
-        DataManager.instance.SaveLevel();*/
-        RewardedAdShow = true;
+        DataManager.instance.SaveLevel();
+        //RewardedAdShow = true;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
